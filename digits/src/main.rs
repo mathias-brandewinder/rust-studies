@@ -27,7 +27,17 @@ fn main() {
         }
 
         let label = numbers[0];
+        let pixels: Vec<u8> = numbers[1..].to_vec();
+
+        let example = Example {
+            label: label,
+            pixels: pixels
+        };
+
+        let label = example.label;
+        let v0 = example.pixels[0];
         println!("label = {label}");
+
         println!("{line}");
     }
 
