@@ -1,5 +1,11 @@
 use std::fs;
 
+// An Example has a label (what digit it is), and pixels
+struct Example {
+    label: u8,
+    pixels: Vec<u8>
+}
+
 fn main() {
     println!("starting");
     let contents =
@@ -8,10 +14,20 @@ fn main() {
 
     let file_lines = contents.lines();
     for line in file_lines {
+
         let blocks = line.split(',');
+        let mut numbers: Vec<u8> = Vec::new();
+
         for block in blocks {
-            println!("{block}");
+            let n =
+                block
+                    .parse::<u8>()
+                    .expect("Failed to convert to number");
+            numbers.push(n);
         }
+
+        let label = numbers[0];
+        println!("label = {label}");
         println!("{line}");
     }
 
