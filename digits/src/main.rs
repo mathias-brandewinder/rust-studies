@@ -8,9 +8,12 @@ struct Example {
 
 fn main() {
     println!("starting");
+
     let contents =
         fs::read_to_string("sample.csv")
             .expect("Failed to read file");
+
+    let mut sample: Vec<Example> = Vec::new();
 
     let file_lines = contents.lines();
     for line in file_lines {
@@ -34,11 +37,14 @@ fn main() {
             pixels: pixels
         };
 
-        let label = example.label;
-        let v0 = example.pixels[0];
-        println!("label = {label}");
+        sample.push(example);
+    }
 
-        println!("{line}");
+    for example in sample {
+        let label = example.label;
+        let first_pixel = example.pixels[0];
+        let last_pixel = example.pixels[example.pixels.len() - 1];
+        println!("Label = {label}, pixels = {first_pixel}, ..., {last_pixel}");
     }
 
     println!("finished");
